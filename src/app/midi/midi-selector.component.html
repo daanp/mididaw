@@ -1,0 +1,10 @@
+<h2>Outputs</h2>
+<div *ngFor="let output of outputs">
+  {{output._midiOutput.name}}
+</div>
+<h2>Inputs</h2>
+<div *ngFor="let input of inputs">
+  {{input._midiInput.name}}
+</div>
+
+<button (click)="refresh()">Refresh</button>
