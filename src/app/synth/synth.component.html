@@ -8,3 +8,12 @@
 </mat-slider>
 {{volumeSlider.value.toPrecision(2)}}
 
+<mat-form-field>
+  <mat-label>Waveform</mat-label>
+  <mat-select [formControl]="oscillatorType" (selectionChange)="changeOscillatorType()">
+    <mat-option *ngFor="let type of oscillatorTypeList" [value]="type.name">
+      {{type.listName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+

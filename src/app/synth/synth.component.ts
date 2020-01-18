@@ -3,6 +3,7 @@ import * as Tone from 'tone';
 import {Synth} from 'tone';
 import {Observable} from 'rxjs';
 import {MatSliderChange} from '@angular/material';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-synth',
@@ -10,6 +11,7 @@ import {MatSliderChange} from '@angular/material';
   styleUrls: ['./synth.component.css']
 })
 export class SynthComponent implements OnInit {
+
 
 
   @Input()
@@ -21,11 +23,30 @@ export class SynthComponent implements OnInit {
   synth;
 
   notesDown = [];
+  oscillatorTypeList: any = [
+    { name: 'square',
+     listName: 'Square'
+    },
+    { name: 'sine',
+      listName: 'Sine'
+    },
+    { name: 'triangle',
+      listName: 'Triangle'
+    },
+    { name: 'sawtooth',
+      listName: 'Sawtooth'
+    },
+  ];
+  oscillatorType: FormControl;
 
   constructor() { }
 
   ngOnInit() {
     this.synth = new Tone.Synth().toMaster();
+    this.oscillatorType = new FormControl('');
+
+    this.oscillatorType.patchValue(this.synth.oscillator.type);
+
 
     this.notesOn.subscribe((note) => {
       if (this.notesDown.length === 0) {
@@ -46,4 +67,7 @@ export class SynthComponent implements OnInit {
     });
   }
 
+  changeOscillatorType() {
+    this.synth.oscillator.type = this.oscillatorType.value;
+  }
 }
