@@ -6,11 +6,13 @@ import { MidiSelectorComponent } from './midi/midi-selector.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatSelectModule} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
+import { SynthComponent } from './synth/synth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MidiSelectorComponent
+    MidiSelectorComponent,
+    SynthComponent
   ],
   imports: [
     BrowserModule,

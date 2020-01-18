@@ -1,7 +1,7 @@
 <mat-card>
   <mat-form-field>
     <mat-label>Inputs</mat-label>
-    <mat-select [formControl]="inputs" multiple>
+    <mat-select [formControl]="inputs" multiple (selectionChange)="changeInputs()">
       <mat-option *ngFor="let input of inputList" [value]="input._midiInput.name">
         {{input._midiInput.name}}
       </mat-option>
@@ -10,7 +10,7 @@
 
   <mat-form-field>
     <mat-label>Outputs</mat-label>
-    <mat-select [formControl]="outputs" multiple>
+    <mat-select [formControl]="outputs" multiple (selectionChange)="changeOutputs()">
       <mat-option *ngFor="let output of outputList" [value]="output._midiOutput.name">
         {{output._midiOutput.name}}
       </mat-option>
@@ -18,10 +18,15 @@
   </mat-form-field>
 
 
-</mat-card>
+  <button mat-button (click)="refresh()">
+    Refresh
+  </button>
 
-<button mat-button (click)="refresh()">
-  Refresh
-</button>
+</mat-card>
+<mat-card>
+  <h4>Synths</h4>
+  <app-synth [notesOn]="noteOnSubject.asObservable()"
+             [notesOff]="noteOffSubject.asObservable()"></app-synth>
+</mat-card>
 
 
