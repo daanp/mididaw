@@ -1,1 +1,10 @@
-synth
+<h5>Portamento</h5>
+<mat-slider [(ngModel)]="synth.portamento" #portamentoSlider min="0" max="3" step="0.01" value="0" id="portamento">
+</mat-slider>
+{{portamentoSlider.value}}
+
+<h5>Volume</h5>
+<mat-slider  [(ngModel)]="synth.volume.value" #volumeSlider  min="-10" max="10" step="0.1" value="0s" id="volume">
+</mat-slider>
+{{volumeSlider.value.toPrecision(2)}}
+

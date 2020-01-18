@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import * as Tone from 'tone';
 import {Synth} from 'tone';
 import {Observable} from 'rxjs';
+import {MatSliderChange} from '@angular/material';
 
 @Component({
   selector: 'app-synth',
@@ -25,9 +26,13 @@ export class SynthComponent implements OnInit {
 
   ngOnInit() {
     this.synth = new Tone.Synth().toMaster();
+
     this.notesOn.subscribe((note) => {
-      console.log('trigger attack' + note);
-      this.synth.triggerAttack(note);
+      if (this.notesDown.length === 0) {
+        this.synth.triggerAttack(note);
+      } else {
+        this.synth.setNote(note);
+      }
       this.notesDown.push(note);
 
     });
