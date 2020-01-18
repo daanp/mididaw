@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as webmidi from 'webmidi';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-midi',
@@ -8,8 +9,10 @@ import * as webmidi from 'webmidi';
 })
 export class MidiSelectorComponent implements OnInit {
 
-  outputs = [];
-  inputs = [];
+  outputList = [];
+  inputList = [];
+  inputs;
+  outputs;
   wm = webmidi.default;
 
   constructor() {
@@ -22,19 +25,21 @@ export class MidiSelectorComponent implements OnInit {
         console.log('WebMidi enabled!');
         console.log(this.wm.inputs);
         console.log(this.wm.outputs);
-        this.outputs = this.wm.outputs;
-        this.inputs = this.wm.inputs;
+        this.outputList = this.wm.outputs;
+        this.inputList = this.wm.inputs;
       }
 
     });
   }
 
   refresh() {
-    this.outputs = this.wm.outputs;
-    this.inputs = this.wm.inputs;
+    this.outputList = this.wm.outputs;
+    this.inputList = this.wm.inputs;
   }
 
   ngOnInit() {
+    this.inputs = new FormControl([]);
+    this.outputs = new FormControl([]);
   }
 
 }
