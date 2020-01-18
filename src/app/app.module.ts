@@ -4,7 +4,15 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MidiSelectorComponent } from './midi/midi-selector.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSliderModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule, MatDividerModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatInputModule,
+  MatSelectModule,
+  MatSliderModule
+} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SynthComponent } from './synth/synth.component';
 
@@ -24,7 +32,9 @@ import { SynthComponent } from './synth/synth.component';
     MatCardModule,
     MatSliderModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,48 +1,66 @@
-<h5>Portamento</h5>
-<mat-slider [(ngModel)]="synth.portamento" #portamentoSlider min="0" max="3" step="0.01" value="0" id="portamento">
-</mat-slider>
-{{portamentoSlider.value}}
+<mat-card class="synth-card">
+  <mat-card-title>
+    <input [(ngModel)]="name" matInput placeholder="Synth"/>
+  </mat-card-title>
 
-<h5>Volume</h5>
-<mat-slider [(ngModel)]="synth.volume.value" #volumeSlider min="-46" max="46" step="0.1" value="0" id="volume">
-</mat-slider>
-{{volumeSlider.value.toPrecision(2)}}
-
-<mat-form-field>
-  <mat-label>Waveform</mat-label>
-  <mat-select [formControl]="oscillatorType" (selectionChange)="changeOscillatorType()">
-    <mat-option *ngFor="let type of oscillatorTypeList" [value]="type.name">
-      {{type.listName}}
-    </mat-option>
-  </mat-select>
+  <mat-card-content>
+      <mat-form-field>
+        <mat-label class="slider-label">Type</mat-label>
+        <mat-select [formControl]="oscillatorType" (selectionChange)="changeOscillatorType()">
+          <mat-option *ngFor="let type of oscillatorTypeList" [value]="type.name">
+            {{type.listName}}
+          </mat-option>
+        </mat-select>
 
 
-</mat-form-field>
-<mat-form-field>
-  <input matInput type="number" [(ngModel)]="synth.oscillator.partialCount" matInput placeholder="Partials (0 is max)">
-</mat-form-field>
+      </mat-form-field>
 
-<h5>Attack</h5>
-<mat-slider [(ngModel)]="synth.envelope.attack" #attackSlider min="0" max="2" step="0.05" value="0.005" id="attack">
-</mat-slider>
-{{attackSlider.value.toPrecision(4)}}
+      <br>
 
-<h5>Decay</h5>
-<mat-slider [(ngModel)]="synth.envelope.decay" #decaySlider min="0.01" max="2" step="0.05" value="0.1" id="decay">
-</mat-slider>
-{{decaySlider.value.toPrecision(4)}}
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="synth.oscillator.partialCount" matInput
+               placeholder="Partials (0 is max)">
+      </mat-form-field>
 
 
-<h5>Sustain</h5>
-<mat-slider [(ngModel)]="synth.envelope.sustain" #sustainSlider min="0" max="1" step="0.01  " value="0.3" id="sustain">
-</mat-slider>
-{{sustainSlider.value.toPrecision(4)}}
+      <mat-label class="slider-label">Portamento</mat-label>
+
+      <mat-slider [(ngModel)]="synth.portamento" #portamentoSlider min="0" max="3" step="0.01" value="0"
+                  id="portamento">
+      </mat-slider>
+      {{portamentoSlider.value}}
+
+      <mat-label class="slider-label">Volume</mat-label>
+      <mat-slider [(ngModel)]="synth.volume.value" #volumeSlider min="-46" max="46" step="0.1" value="0" id="volume">
+      </mat-slider>
+      {{volumeSlider.value.toPrecision(2)}}
 
 
-<h5>Release</h5>
-<mat-slider [(ngModel)]="synth.envelope.release" #releaseSlider min="0.01" max="2" step="0.01" value="1" id="release">
-</mat-slider>
-{{releaseSlider.value.toPrecision(4)}}
+      <mat-label class="slider-label">Attack</mat-label>
+      <mat-slider [(ngModel)]="synth.envelope.attack" #attackSlider min="0" max="2" step="0.05" value="0.005"
+                  id="attack">
+      </mat-slider>
+      {{attackSlider.value.toPrecision(4)}}
 
 
+      <mat-label class="slider-label">Decay</mat-label>
+      <mat-slider [(ngModel)]="synth.envelope.decay" #decaySlider min="0.01" max="2" step="0.05" value="0.1" id="decay">
+      </mat-slider>
+      {{decaySlider.value.toPrecision(4)}}
 
+
+      <mat-label class="slider-label">Sustain</mat-label>
+      <mat-slider [(ngModel)]="synth.envelope.sustain" #sustainSlider min="0" max="1" step="0.01  " value="0.3"
+                  id="sustain">
+      </mat-slider>
+      {{sustainSlider.value.toPrecision(4)}}
+
+
+      <mat-label class="slider-label">Release</mat-label>
+      <mat-slider [(ngModel)]="synth.envelope.release" #releaseSlider min="0.01" max="2" step="0.01" value="1"
+                  id="release">
+      </mat-slider>
+      {{releaseSlider.value.toPrecision(4)}}
+
+  </mat-card-content>
+</mat-card>

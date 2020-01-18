@@ -38,10 +38,12 @@ export class SynthComponent implements OnInit {
     },
   ];
   oscillatorType: FormControl;
+  name: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.name = 'Synth';
     this.synth = new Tone.Synth().toMaster();
     this.oscillatorType = new FormControl('');
 
