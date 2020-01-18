@@ -4,7 +4,7 @@
 {{portamentoSlider.value}}
 
 <h5>Volume</h5>
-<mat-slider  [(ngModel)]="synth.volume.value" #volumeSlider  min="-10" max="10" step="0.1" value="0s" id="volume">
+<mat-slider [(ngModel)]="synth.volume.value" #volumeSlider min="-46" max="46" step="0.1" value="0" id="volume">
 </mat-slider>
 {{volumeSlider.value.toPrecision(2)}}
 
@@ -15,5 +15,9 @@
       {{type.listName}}
     </mat-option>
   </mat-select>
-</mat-form-field>
 
+
+</mat-form-field>
+<mat-form-field>
+  <input matInput type="number" [(ngModel)]="synth.oscillator.partialCount" matInput placeholder="Partials (0 is max)g">
+</mat-form-field>
