@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as webmidi from 'webmidi';
 import {FormControl} from '@angular/forms';
 import {Subject} from 'rxjs';
+import * as Tone from 'tone';
 
 @Component({
   selector: 'app-midi',

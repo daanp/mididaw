@@ -15,12 +15,16 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SynthComponent } from './synth/synth.component';
+import { SequencerComponent } from './sequencer/sequencer.component';
+import { TransportComponent } from './transport/transport.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MidiSelectorComponent,
-    SynthComponent
+    SynthComponent,
+    SequencerComponent,
+    TransportComponent
   ],
   imports: [
     BrowserModule,

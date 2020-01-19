@@ -24,9 +24,13 @@
 
 </mat-card>
 <mat-card>
+  <app-sequencer></app-sequencer>
+</mat-card>
+<mat-card>
   <h4>Synths</h4>
   <app-synth [notesOn]="noteOnSubject.asObservable()"
              [notesOff]="noteOffSubject.asObservable()"></app-synth>
 </mat-card>
+
 
 
