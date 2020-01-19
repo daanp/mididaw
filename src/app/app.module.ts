@@ -17,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SynthComponent } from './synth/synth.component';
 import { SequencerComponent } from './sequencer/sequencer.component';
 import { TransportComponent } from './transport/transport.component';
+import { PolysynthComponent } from './polysynth/polysynth.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TransportComponent } from './transport/transport.component';
     MidiSelectorComponent,
     SynthComponent,
     SequencerComponent,
-    TransportComponent
+    TransportComponent,
+    PolysynthComponent
   ],
   imports: [
     BrowserModule,
