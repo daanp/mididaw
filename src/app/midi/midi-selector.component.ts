@@ -106,11 +106,11 @@ export class MidiSelectorComponent implements OnInit {
 
   }
 
-  private sendNoteOnToSynths(note: IEventNote | Tone.Encoding.Note | string) {
+  private sendNoteOnToSynths(note: any) {
     this.noteOnSubject.next(note.name + note.octave);
   }
 
-  private sendNoteOffToSynths(note: IEventNote | Tone.Encoding.Note | string) {
+  private sendNoteOffToSynths(note: any) {
     this.noteOffSubject.next(note.name + note.octave);
   }
 }

@@ -16,48 +16,51 @@ export class PolysynthComponent implements OnInit {
   @Input()
   notesOff: Observable<string>;
 
-  synth;
+  polySynth;
 
   notesDown = [];
   oscillatorTypeList: any = [
-    { name: 'square',
+    {
+      name: 'square',
       listName: 'Square'
     },
-    { name: 'sine',
+    {
+      name: 'sine',
       listName: 'Sine'
     },
-    { name: 'triangle',
+    {
+      name: 'triangle',
       listName: 'Triangle'
     },
-    { name: 'sawtooth',
+    {
+      name: 'sawtooth',
       listName: 'Sawtooth'
     },
   ];
   oscillatorType: FormControl;
   name: string;
+  synth: Tone.Synth;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.name = 'PolySynth';
-    this.synth = new Tone.PolySynth(10).toMaster();
+    this.polySynth = new Tone.PolySynth(99).toMaster();
+    this.polySynth.sync();
 
+    this.synth = this.polySynth.get();
+    console.log(this.synth);
     this.notesOn.subscribe((note) => {
-      if (this.notesDown.length === 0) {
-        this.synth.triggerAttack(note);
-      } else {
-        this.synth.setNote(note);
-      }
-      this.notesDown.push(note);
-
+      this.polySynth.triggerAttack(note);
     });
     this.notesOff.subscribe((note) => {
-      this.notesDown.splice( this.notesDown.indexOf(note), 1 );
-      if (this.notesDown.length === 0) {
-        this.synth.triggerRelease(note);
-      }
+      this.polySynth.triggerRelease(note);
     });
   }
 
 
+  setPolySynth() {
+    this.polySynth.set(this.synth);
+  }
 }
