@@ -12,8 +12,6 @@ import {FormControl} from '@angular/forms';
 })
 export class SynthComponent implements OnInit {
 
-
-
   @Input()
   notesOn: Observable<string>;
 

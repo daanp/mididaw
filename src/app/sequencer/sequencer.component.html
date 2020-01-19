@@ -1,12 +1,17 @@
 <mat-card>
+  <h1>{{currentColumn|async}}</h1>
   <mat-grid-list cols="{{columns+1}}" rowHeight="2:1">
     <div *ngFor="let note of notes" class="sequencer-row">
       <mat-grid-tile class="sequencer-note-label">{{note}}</mat-grid-tile>
       <mat-grid-tile *ngFor="let col of columnArray[note]; let i = index;"
                      (click)="toggleTile(i, note)"
+                     [class.active]="(currentColumn | async) === i "
                      [ngClass]="columnArray[note][i] ? 'sequencer-tile-on' : 'sequencer-tile-off'">
         {{columnArray[note][i]}}
       </mat-grid-tile>
     </div>
   </mat-grid-list>
 </mat-card>
+
+
+<app-polysynth [notesOn]="noteOnSubject" [notesOff]="noteOffSubject"></app-polysynth>

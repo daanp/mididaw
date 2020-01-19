@@ -5,3 +5,7 @@
 .sequencer-tile-off {
   background: red;
 }
+
+.active {
+  background-color: blue;
+}
