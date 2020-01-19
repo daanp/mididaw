@@ -10,8 +10,9 @@ export class TransportComponent implements OnInit {
 
   constructor() { }
 
+  private bpm = 120;
+
   ngOnInit() {
-    // Tone.Transport.start();
   }
 
   start() {
@@ -22,4 +23,8 @@ export class TransportComponent implements OnInit {
     Tone.Transport.stop();
   }
 
+  changeBpm($event: Event) {
+    console.log(this.bpm);
+    Tone.Transport.bpm.value = this.bpm;
+  }
 }

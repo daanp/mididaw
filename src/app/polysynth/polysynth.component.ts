@@ -46,8 +46,9 @@ export class PolysynthComponent implements OnInit {
 
   ngOnInit() {
     this.name = 'PolySynth';
-    this.polySynth = new Tone.PolySynth(99).toMaster();
+    this.polySynth = new Tone.PolySynth(500  ).toMaster();
     this.polySynth.sync();
+
 
     this.synth = this.polySynth.get();
     console.log(this.synth);

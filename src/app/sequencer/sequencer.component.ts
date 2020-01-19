@@ -11,7 +11,7 @@ export class SequencerComponent implements OnInit {
 
   private seq;
 
-  private columns = 4;
+  private columns = 20;
   private columnArray = {};
   private notes: string[];
   private sequenceArrays;
@@ -20,10 +20,11 @@ export class SequencerComponent implements OnInit {
   noteOffSubject: Subject<string> = new Subject<string>();
     currentColumn: Observable<number> = new Observable<number>();
   private zone: NgZone;
+  private notesOn: string[] = [];
 
   constructor(zone: NgZone) {
     this.zone = zone;
-    this.notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3'];
+    this.notes = ['C4', 'D4', 'E4', 'G4', 'A4', 'C3', 'D3', 'E3',  'G3', 'A3'];
     this.notes.forEach((note) => {
       this.columnArray[note] = Array(this.columns).fill(false);
     });
@@ -41,13 +42,19 @@ export class SequencerComponent implements OnInit {
         this.currentColumn = of(index);
       });
       this.currentColumn = of(index);
+
       notes.forEach((note) => {
-        this.noteOffSubject.next(note);
+        if (this.notesOn.includes(note)) {
+          this.noteOffSubject.next(note);
+        }
         console.log(time)
+
         if (this.columnArray[note][index]) {
           this.noteOnSubject.next(note);
+          this.notesOn.push(note);
         }
       });
+      console.log(time);
 
     }, indices, '8n').start(0);
   }

@@ -1,11 +1,21 @@
+
 .sequencer-tile-on {
   background: aqua;
 }
+
 
 .sequencer-tile-off {
   background: red;
 }
 
+
+.active.sequencer-tile-on {
+  background: yellowgreen;
+}
+
 .active {
   background-color: blue;
 }
+
+
+

@@ -1,4 +1,5 @@
 <mat-card>
   <button mat-raised-button (click)="start()">Start</button>
   <button mat-raised-button (click)="stop()">Stop</button>
+  <input matInput type="number" [(ngModel)]="bpm" (change)="changeBpm($event)" />
 </mat-card>
