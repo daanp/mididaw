@@ -1,7 +1,7 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import * as Tone from 'tone';
 import {Observable, of, Subject} from 'rxjs';
-import {SequencerSettingsComponent} from '../sequencer-settings/sequencer-settings.component';
+import {SequencerSettings, SequencerSettingsComponent} from '../sequencer-settings/sequencer-settings.component';
 import {MatDialog} from '@angular/material';
 
 @Component({
@@ -19,24 +19,38 @@ export class SequencerComponent implements OnInit {
 
   noteOnSubject: Subject<string> = new Subject<string>();
   noteOffSubject: Subject<string> = new Subject<string>();
-    currentColumn: Observable<number> = new Observable<number>();
+  currentColumn: Observable<number> = new Observable<number>();
   private zone: NgZone;
   private notesOn: string[] = [];
+  private indices: any;
 
   constructor(zone: NgZone, public dialog: MatDialog) {
     this.zone = zone;
-    this.notes = ['C4', 'D4', 'E4', 'G4', 'A4', 'C3', 'D3', 'E3',  'G3', 'A3'];
-    this.notes.forEach((note) => {
-      this.columnArray[note] = Array(this.columns).fill(false);
-    });
-    console.log(this.columnArray);
   }
 
 
+  private setUpParams() {
+    this.notes.forEach((note) => {
+      this.columnArray[note] = Array(this.columns).fill(false);
+    });
+
+    this.indices = this.columnArray[this.notes[0]].map((x, i) => i);
+
+    this.currentColumn = of(1);
+  }
+
   ngOnInit() {
-    this.currentColumn = of(1 );
-    const indices = this.columnArray[this.notes[0]].map((x, i) => i);
-    this.seq = new Tone.Sequence((time, index: number) => {
+
+    this.notes = ['C4', 'D4', 'E4', 'G4', 'A4', 'C3', 'D3', 'E3', 'G3', 'A3'];
+    this.setUpParams();
+
+    this.seq = this.getSequence();
+    this.seq.start(0);
+  }
+
+
+  private getSequence() {
+    return new Tone.Sequence((time, index: number) => {
       const notes = Object.keys(this.columnArray);
 
       this.zone.run(() => {
@@ -55,9 +69,8 @@ export class SequencerComponent implements OnInit {
         }
       });
 
-    }, indices, '8n').start(0);
+    }, this.indices, '8n');
   }
-
 
   toggleTile(col: any, note: string) {
     this.columnArray[note][col] = !this.columnArray[note][col];
@@ -70,15 +83,33 @@ export class SequencerComponent implements OnInit {
   }
 
   openSettingsDialog() {
+    this.stop();
+
     const dialogRef = this.dialog.open(SequencerSettingsComponent, {
       width: '450px',
       height: '200px',
       data: {columns: this.columns}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+    dialogRef.afterClosed().subscribe((result: SequencerSettings) => {
+      if (result) {
+        this.columns = parseInt(result.columns);
+        this.stop();
+        this.setUpParams();
+        this.seq.dispose();
+        this.seq = this.getSequence();
+      }
     });
+  }
+
+  start() {
+    this.seq.start(0);
+  }
+
+  stop() {
+    this.notes.forEach(note =>  {
+      this.noteOffSubject.next(note);
+    })
+    this.seq.stop(0);
   }
 }

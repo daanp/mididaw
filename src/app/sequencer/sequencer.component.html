@@ -1,6 +1,9 @@
 <mat-card>
   <h1>{{currentColumn|async}}</h1>
   <button mat-raised-button (click)="openSettingsDialog()">Settings</button>
+  <button mat-raised-button (click)="clear()">Clear</button>
+  <button mat-raised-button (click)="start()">Start</button>
+  <button mat-raised-button (click)="stop()">Stop</button>
   <mat-grid-list cols="{{columns+1}}" rowHeight="2:1">
     <div *ngFor="let note of notes" class="sequencer-row">
       <mat-grid-tile class="sequencer-note-label">{{note}}</mat-grid-tile>
@@ -8,7 +11,6 @@
                      (click)="toggleTile(i, note)"
                      [class.active]="(currentColumn | async) === i "
                      [ngClass]="columnArray[note][i] ? 'sequencer-tile-on' : 'sequencer-tile-off'">
-        {{columnArray[note][i]}}
       </mat-grid-tile>
     </div>
   </mat-grid-list>
