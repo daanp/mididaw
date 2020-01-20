@@ -6,7 +6,7 @@ import { MidiSelectorComponent } from './midi/midi-selector.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
-  MatCardModule, MatDividerModule,
+  MatCardModule, MatDialogModule, MatDividerModule,
   MatFormFieldModule,
   MatGridListModule,
   MatInputModule,
@@ -18,6 +18,7 @@ import { SynthComponent } from './synth/synth.component';
 import { SequencerComponent } from './sequencer/sequencer.component';
 import { TransportComponent } from './transport/transport.component';
 import { PolysynthComponent } from './polysynth/polysynth.component';
+import { SequencerSettingsComponent } from './sequencer-settings/sequencer-settings.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PolysynthComponent } from './polysynth/polysynth.component';
     SynthComponent,
     SequencerComponent,
     TransportComponent,
-    PolysynthComponent
+    PolysynthComponent,
+    SequencerSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,11 @@ import { PolysynthComponent } from './polysynth/polysynth.component';
     FormsModule,
     MatInputModule,
     MatGridListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    SequencerSettingsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

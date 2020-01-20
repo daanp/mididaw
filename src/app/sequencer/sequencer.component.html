@@ -1,5 +1,6 @@
 <mat-card>
   <h1>{{currentColumn|async}}</h1>
+  <button mat-raised-button (click)="openSettingsDialog()">Settings</button>
   <mat-grid-list cols="{{columns+1}}" rowHeight="2:1">
     <div *ngFor="let note of notes" class="sequencer-row">
       <mat-grid-tile class="sequencer-note-label">{{note}}</mat-grid-tile>

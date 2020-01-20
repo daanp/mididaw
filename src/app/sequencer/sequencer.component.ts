@@ -1,6 +1,8 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import * as Tone from 'tone';
 import {Observable, of, Subject} from 'rxjs';
+import {SequencerSettingsComponent} from '../sequencer-settings/sequencer-settings.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-sequencer',
@@ -11,10 +13,9 @@ export class SequencerComponent implements OnInit {
 
   private seq;
 
-  private columns = 20;
+  private columns = 16;
   private columnArray = {};
   private notes: string[];
-  private sequenceArrays;
 
   noteOnSubject: Subject<string> = new Subject<string>();
   noteOffSubject: Subject<string> = new Subject<string>();
@@ -22,7 +23,7 @@ export class SequencerComponent implements OnInit {
   private zone: NgZone;
   private notesOn: string[] = [];
 
-  constructor(zone: NgZone) {
+  constructor(zone: NgZone, public dialog: MatDialog) {
     this.zone = zone;
     this.notes = ['C4', 'D4', 'E4', 'G4', 'A4', 'C3', 'D3', 'E3',  'G3', 'A3'];
     this.notes.forEach((note) => {
@@ -65,6 +66,19 @@ export class SequencerComponent implements OnInit {
   clear() {
     this.notes.forEach((note) => {
       this.columnArray[note] = Array(this.columns).fill(false);
+    });
+  }
+
+  openSettingsDialog() {
+    const dialogRef = this.dialog.open(SequencerSettingsComponent, {
+      width: '450px',
+      height: '200px',
+      data: {columns: this.columns}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
     });
   }
 }

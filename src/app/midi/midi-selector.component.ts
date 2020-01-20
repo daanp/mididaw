@@ -48,7 +48,7 @@ export class MidiSelectorComponent implements OnInit {
   }
 
   changeInputs() {
-    this.wm.inputs.forEach((input) => {
+    this.wm.inputs.forEach((input: any) => {
       input.removeListener();
       if (this.inputs.value.includes(input._midiInput.name)) {
         this.addListeners(input);
