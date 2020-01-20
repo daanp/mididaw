@@ -13,6 +13,7 @@ export class TransportComponent implements OnInit {
   private bpm = 120;
 
   ngOnInit() {
+    Tone.context.latencyHint = 'balanced';
   }
 
   start() {

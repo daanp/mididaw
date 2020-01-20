@@ -47,14 +47,12 @@ export class SequencerComponent implements OnInit {
         if (this.notesOn.includes(note)) {
           this.noteOffSubject.next(note);
         }
-        console.log(time)
 
         if (this.columnArray[note][index]) {
           this.noteOnSubject.next(note);
           this.notesOn.push(note);
         }
       });
-      console.log(time);
 
     }, indices, '8n').start(0);
   }

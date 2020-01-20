@@ -49,11 +49,13 @@ export class PolysynthComponent implements OnInit {
     this.polySynth = new Tone.PolySynth(500  ).toMaster();
     this.polySynth.sync();
 
+    this.oscillatorType = new FormControl('');
+
 
     this.synth = this.polySynth.get();
     console.log(this.synth);
     this.notesOn.subscribe((note) => {
-      this.polySynth.triggerAttack(note);
+      this.polySynth.triggerAttack(note, '+0.05');
     });
     this.notesOff.subscribe((note) => {
       this.polySynth.triggerRelease(note);
@@ -64,4 +66,11 @@ export class PolysynthComponent implements OnInit {
   setPolySynth() {
     this.polySynth.set(this.synth);
   }
+
+  changeOscillatorType() {
+    this.synth.oscillator.type = this.oscillatorType.value;
+    this.polySynth.set(this.synth);
+
+  }
+
 }
