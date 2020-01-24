@@ -4,6 +4,27 @@
   <mat-form-field>
     <input matInput [(ngModel)]="settings.columns" type="number">
   </mat-form-field>
+  <br>
+  <mat-label>Octave: </mat-label>
+  <mat-form-field>
+    <input matInput [(ngModel)]="settings.octave" type="number">
+  </mat-form-field>
+  <br>
+  <mat-label class="slider-label">Tonic</mat-label>
+  <mat-select [(ngModel)]="settings.tonic">
+    <mat-option *ngFor="let note of tonics" [value]="note">
+      {{note}}
+    </mat-option>
+  </mat-select>
+  <br>
+  <mat-label class="slider-label">Scale</mat-label>
+  <mat-select [(ngModel)]="settings.scale">
+    <mat-option *ngFor="let type of scales" [value]="type.name">
+      {{type.name}}
+    </mat-option>
+  </mat-select>
+
+
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>

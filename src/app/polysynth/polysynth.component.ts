@@ -55,10 +55,12 @@ export class PolysynthComponent implements OnInit {
     this.synth = this.polySynth.get();
     console.log(this.synth);
     this.notesOn.subscribe((note) => {
-      this.polySynth.triggerAttack(note, '+0.05');
+      this.polySynth.triggerAttack(note);
+      console.log('trigger attack ' + note);
     });
     this.notesOff.subscribe((note) => {
-      this.polySynth.triggerRelease(note);
+      this.polySynth.triggerRelease(note, '+0.01');
+      console.log('trigger release ' + note);
     });
   }
 
@@ -70,7 +72,6 @@ export class PolysynthComponent implements OnInit {
   changeOscillatorType() {
     this.synth.oscillator.type = this.oscillatorType.value;
     this.polySynth.set(this.synth);
-
   }
 
 }

@@ -3,6 +3,7 @@ import * as Tone from 'tone';
 import {Observable, of, Subject} from 'rxjs';
 import {SequencerSettings, SequencerSettingsComponent} from '../sequencer-settings/sequencer-settings.component';
 import {MatDialog} from '@angular/material';
+import {Scale} from 'tonal';
 
 @Component({
   selector: 'app-sequencer',
@@ -31,7 +32,14 @@ export class SequencerComponent implements OnInit {
 
   private setUpParams() {
     this.notes.forEach((note) => {
-      this.columnArray[note] = Array(this.columns).fill(false);
+      if (!this.columnArray[note]) {
+        this.columnArray[note] = Array(this.columns).fill(false);
+      }
+    });
+
+    const removedNotes = Object.keys(this.columnArray).filter(key => !this.notes.includes(key));
+    removedNotes.forEach((removedNote) => {
+      delete this.columnArray[removedNote];
     });
 
     this.indices = this.columnArray[this.notes[0]].map((x, i) => i);
@@ -87,15 +95,17 @@ export class SequencerComponent implements OnInit {
 
     const dialogRef = this.dialog.open(SequencerSettingsComponent, {
       width: '450px',
-      height: '200px',
+      height: '300px',
       data: {columns: this.columns}
     });
 
     dialogRef.afterClosed().subscribe((result: SequencerSettings) => {
       if (result) {
+        this.notes = Scale.notes(result.tonic + result.octave + ' ' + result.scale);
         this.columns = parseInt(result.columns);
         this.stop();
         this.setUpParams();
+        console.log('disposing of sequence');
         this.seq.dispose();
         this.seq = this.getSequence();
       }
@@ -107,9 +117,9 @@ export class SequencerComponent implements OnInit {
   }
 
   stop() {
-    this.notes.forEach(note =>  {
+    this.notes.forEach(note => {
       this.noteOffSubject.next(note);
-    })
+    });
     this.seq.stop(0);
   }
 }
